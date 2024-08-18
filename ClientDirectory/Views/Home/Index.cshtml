@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Client>
+
+<h1>Welcome to the Client Directory</h1>
+
+<p>
+    <a href="@Url.Action("Create", "Clients")" class="btn btn-primary">Add New Client</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th>City</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.FirstName @client.LastName</td>
+                <td>@client.Company.Name</td>
+                <td>@client.City.Name</td>
+                <td>
+                    <a href="@Url.Action("Edit", "Clients", new { id = client.Id })" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="@Url.Action("Delete", "Clients", new { id = client.Id })" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

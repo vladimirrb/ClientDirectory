@@ -1,0 +1,20 @@
+﻿@model ModalViewModel
+
+<div class="modal fade" id="@Model.ModalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@Model.Title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="@Model.FormId" method="post" asp-action="@Model.Action">
+                    @Html.Partial(Model.PartialView, Model.Model)
+                    <div class="form-group">
+                        <input type="submit" value="@Model.SubmitButtonText" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

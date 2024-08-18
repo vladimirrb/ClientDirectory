@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Client>
+
+<h2>Clients</h2>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createClientModal">
+    Create New Client
+</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>City</th>
+            <th>Company</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.LastName</td>
+                <td>@client.FirstName</td>
+                <td>@client.City.Name</td>
+                <td>@client.Company.Name</td>
+                <td>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editClientModal" data-id="@client.Id" data-last-name="@client.LastName" data-first-name="@client.FirstName" data-city-id="@client.CityId" data-company-id="@client.CompanyId">Edit</button>
+                    <a asp-action="Delete" asp-route-id="@client.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Create Client Modal -->
+@await Html.PartialAsync("_CreateOrEditModal", new ModalViewModel
+    {
+        ModalId = "createClientModal",
+        Title = "Create Client",
+        Action = "Create",
+        FormId = "createClientForm",
+        SubmitButtonText = "Create",
+        PartialView = "_ClientForm",
+        Model = new Client()
+    })
+
+<!-- Edit Client Modal -->
+@await Html.PartialAsync("_CreateOrEditModal", new ModalViewModel
+    {
+        ModalId = "editClientModal",
+        Title = "Edit Client",
+        Action = "Edit",
+        FormId = "editClientForm",
+        SubmitButtonText = "Save",
+        PartialView = "_ClientForm",
+        Model = new Client()
+    })

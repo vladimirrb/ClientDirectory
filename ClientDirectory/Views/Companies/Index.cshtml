@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Company>
+
+<h2>Companies</h2>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCompanyModal">
+    Create New Company
+</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var company in Model)
+        {
+            <tr>
+                <td>@company.Name</td>
+                <td>@company.City.Name</td>
+                <td>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editCompanyModal" data-id="@company.Id" data-name="@company.Name" data-city-id="@company.CityId">Edit</button>
+                    <a asp-action="Delete" asp-route-id="@company.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Create Company Modal -->
+@await Html.PartialAsync("_CreateOrEditModal", new ModalViewModel
+    {
+        ModalId = "createCompanyModal",
+        Title = "Create Company",
+        Action = "Create",
+        FormId = "createCompanyForm",
+        SubmitButtonText = "Create",
+        PartialView = "_CompanyForm",
+        Model = new Company()
+    })
+
+<!-- Edit Company Modal -->
+@await Html.PartialAsync("_CreateOrEditModal", new ModalViewModel
+    {
+        ModalId = "editCompanyModal",
+        Title = "Edit Company",
+        Action = "Edit",
+        FormId = "editCompanyForm",
+        SubmitButtonText = "Save",
+        PartialView = "_CompanyForm",
+        Model = new Company()
+    })

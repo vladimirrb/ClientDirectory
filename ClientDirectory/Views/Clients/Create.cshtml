@@ -1,0 +1,11 @@
+﻿@model Client
+
+<h2>Create New Client</h2>
+
+<form asp-action="Create">
+    @Html.Partial("_ClientForm", Model)
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+<a asp-action="Index">Back to List</a>

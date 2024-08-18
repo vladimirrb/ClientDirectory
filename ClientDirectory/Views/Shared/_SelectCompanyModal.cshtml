@@ -1,0 +1,51 @@
+﻿<div class="modal fade" id="selectCompanyModal" tabindex="-1" role="dialog" aria-labelledby="selectCompanyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="selectCompanyModalLabel">Select Company</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>City</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var company in ViewBag.Companies)
+                        {
+                            
+                            <tr>
+                                <td>company.Name</td>
+                                <td>cityName</td>
+                                <td>
+                                    @* <button type="button" class="btn btn-primary select-company-button" data-id="@company.Id" data-name="@company.Name">Select</button> *@
+                                </td>
+                            </tr>
+                            
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.select-company-button').on('click', function() {
+            var companyId = $(this).data('id');
+            var companyName = $(this).data('name');
+
+            $('#CompanyId').val(companyId);
+            $('#CompanyName').val(companyName);
+
+            $('#selectCompanyModal').modal('hide');
+        });
+    });
+</script>
+
